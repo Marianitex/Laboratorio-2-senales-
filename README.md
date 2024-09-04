@@ -69,15 +69,13 @@ Para la grabacion la frecuencia de muestreo fue de 16 kHz en cada celular, se gr
 
 1. Dialogo persona 1  (Mariana):
 
-Mi nombre es Mariana Higuera
-Tengo 18 años
-Y mi mamá se llama Lilian Caicedo
+Mi nombre es Mariana Higuera, tengo 18 años y mi mamá se llama Lilian Caicedo.
+
+
 
 2. Dialogo persona 2 (Mamá):
 
-Mi mamá se llama Lilia Vasquez 
-Yo tengo 51 años
-Y mi nombre es Lilian Caicedo
+Mi mamá se llama Lilia Vasquez, yo tengo 51 años y mi nombre es Lilian Caicedo.
 
 
 
