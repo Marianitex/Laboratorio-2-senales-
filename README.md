@@ -12,8 +12,10 @@ Septiembre 2024
 * [Cargar audios de voces y rudios](#carga)
 * [Graficas de onda del audio](#onda)
 * [Mezcla archivos de audio](#espectro)
+* [Uso de ICA y separacion](#ica)
 * [Calculo SNR](#snr)
 * [Menu](#menu)
+* [Analisis](#analisis)
 * [Contacto](#contacto)
 ---
 <a name="introduccion"></a> 
@@ -44,12 +46,18 @@ describiendo la información que se puede obtener con cada una de ellas.
 la señal de interés a partir de las señales capturadas por los micrófonos.  
 4. Evaluar los resultados comparando la señal aislada con la señal original utilizado métricas de calidad como la relación señal/ruido para cuantificar el desempeño de la separación. 
 
+<a name="problema"></a> 
+## Problema del coctel
 
+El efecto de fiesta de cóctel es un fenómeno que consiste en enfocar la atención auditiva en un estímulo acústico en particular, mientras se trata de filtrar y eliminar el resto de estímulos que pueden actuar como distractores.El nombre de este fenómeno es bastante representativo del efecto, dado que, si lo pensamos, en una fiesta, cuando estamos hablando con algún invitado, tratamos de filtrar lo que nos está diciendo e ignorando la música y otras conversaciones que puedan estar transcurriendo de forma simultánea, conformando el fondo.
 
+Gracias a este fenómeno, somos capaces de diferenciar entre la voz de la persona con quien estamos manteniendo la conversación de la del resto de personas que puedan estar conformando el fondo acústico del ambiente en el que nos estamos encontrando.Este mismo fenómeno también es el que permite que, sin estar del todo concentrado en otras conversaciones, seamos capaces de captar la atención cuando se menciona una palabra que nos resulta importante, como puede ser el que nos llamen por nuestro nombre.
 
+En este caso como fue mencionado en la introduccion se debia realizar con 3 personas, en un inicio el laboratorio si se hizo de esa manera pero los audios tomados fueron de un tiempo muy bajo (1 segundo), por esta razon al no obtener un buen muestro decidio realizarse una nueva toma con 2 personas de  la siguiente manera:
 
+Las personas se organizaron una en frente de la otra con una distancia de 27,9 cm equivalemte a lo que mide una hoja carta de largo desde los pies de la persona 1 al celular 1, luego otra desde el celular 1 al celular 2 y una ultima hoja desde el celuar 2 a la persona 2. 
 
-
+![Agregar](captura.jpg)
 
 
 
