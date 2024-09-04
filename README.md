@@ -73,6 +73,10 @@ Mi nombre es Mariana Higuera, tengo 18 años y mi mamá se llama Lilian Caicedo.
 
 
 
+https://github.com/user-attachments/assets/e96a3493-853e-496a-ad59-56d1f9f1da32
+
+
+
 2. Dialogo persona 2 (Mamá):
 
 Mi mamá se llama Lilia Vasquez, yo tengo 51 años y mi nombre es Lilian Caicedo.
