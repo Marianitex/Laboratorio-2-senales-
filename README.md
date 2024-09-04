@@ -55,9 +55,29 @@ Gracias a este fenómeno, somos capaces de diferenciar entre la voz de la person
 
 En este caso como fue mencionado en la introduccion se debia realizar con 3 personas, en un inicio el laboratorio si se hizo de esa manera pero los audios tomados fueron de un tiempo muy bajo (1 segundo), por esta razon al no obtener un buen muestro decidio realizarse una nueva toma con 2 personas de  la siguiente manera:
 
-Las personas se organizaron una en frente de la otra con una distancia de 27,9 cm equivalemte a lo que mide una hoja carta de largo desde los pies de la persona 1 al celular 1, luego otra desde el celular 1 al celular 2 y una ultima hoja desde el celuar 2 a la persona 2. 
+Las personas se organizaron una en frente de la otra con una distancia de 27,9 cm equivalemte a lo que mide una hoja carta de largo desde los pies de la persona 1 al celular 1, luego otra hoja desde el celular 1 al celular 2 y una ultima hoja desde el celular 2 a la persona 2. 
 
 ![Agregar](captura.jpg)
+
+La grabacion se realizo en este caso por medio una aplicacion llamada "Grabadora de Voz" la cual la podemos encontrar en app store, esto para asegurar que la frecuencia de muestreo que utilizaramos sea la misma.
+
+![Agregar](grabadora.jpg)
+
+Para la grabacion la frecuencia de muestreo fue de 16 kHz en cada celular, se grabaron 4 segundos del ruido del ambiente y 4 segundos a las personas hablando.
+
+![Agregar](frecuencia.jpg)
+
+1. Dialogo persona 1  (Mariana):
+
+Mi nombre es Mariana Higuera
+Tengo 18 años
+Y mi mamá se llama Lilian Caicedo
+
+2. Dialogo persona 2 (Mamá):
+
+Mi mamá se llama Lilia Vasquez 
+Yo tengo 51 años
+Y mi nombre es Lilian Caicedo
 
 
 
