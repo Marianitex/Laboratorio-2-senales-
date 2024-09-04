@@ -102,9 +102,59 @@ from sklearn.decomposition import FastICA
 
 3. FastICA (de sklearn.decomposition): Es una implementación del algoritmo de Análisis de Componentes Independientes (ICA) en la biblioteca scikit-learn. ICA es una técnica de separación de fuentes ciega (BSS) que intenta descomponer una señal multivariable en componentes estadísticamente independientes.
 
+<a name="carga"></a> 
+## Cargar aduios de voces y ruidos
+
 ```c
 
 ```
+
+<a name="onda"></a> 
+## Graficas de onda del audio
+
+```c
+
+```
+
+<a name="espectro"></a> 
+## Mezcla archivos de audio
+
+```c
+
+```
+
+<a name="ica"></a> 
+## Uso de ICA y separacion
+
+```c
+
+```
+
+<a name="snr"></a> 
+## Calculo SNR
+
+```c
+
+```
+
+<a name="menu"></a> 
+## Menu
+
+```c
+
+```
+
+<a name="analisis"></a> 
+## Analisis
+
+```c
+
+```
+
+<a name="contacto"></a> 
+## Contacto
+* Creado por [Marianitex](https://github.com/Marianitex) - sígueme en mis redes sociales como @_mariana.higuera
+
 
 
 
