@@ -11,7 +11,8 @@ Septiembre 2024
 * [Librerias](#librerias)
 * [Cargar audios de voces y rudios](#carga)
 * [Graficas de onda del audio](#onda)
-* [Mezcla archivos de audio](#espectro)
+* [Espectro de frecuencia](#espectro)
+* [Mezcla archivos de audio](#mezcla)
 * [Uso de ICA y separacion](#ica)
 * [Calculo SNR](#snr)
 * [Menu](#menu)
@@ -102,22 +103,85 @@ from sklearn.decomposition import FastICA
 
 3. FastICA (de sklearn.decomposition): Es una implementación del algoritmo de Análisis de Componentes Independientes (ICA) en la biblioteca scikit-learn. ICA es una técnica de separación de fuentes ciega (BSS) que intenta descomponer una señal multivariable en componentes estadísticamente independientes.
 
+- Compatibilidad y Estandarización: .wav es un formato ampliamente compatible con diversas herramientas y bibliotecas de procesamiento de audio, incluidas librosa y sounddevice, que se utilizan en este código. Esto asegura que no haya problemas de compatibilidad al cargar o reproducir archivos de audio.
+
 <a name="carga"></a> 
-## Cargar aduios de voces y ruidos
+## Cargar audios de voces y ruidos
+
+Este código está diseñado para trabajar con archivos de audio, específicamente para cargar y reproducir grabaciones de voces y ruidos almacenados en archivos de formato `.wav`. El código comienza definiendo dos listas, `audio_voces` y `audio_ruido`, que contienen los nombres de los archivos de audio correspondientes a las voces y ruidos que se desean manipular.
+
+A continuación, se define una función llamada `loadAudio`, que utiliza la biblioteca `librosa` para cargar un archivo de audio. Esta función toma como parámetro el nombre o la ruta de un archivo de audio y devuelve dos cosas: un array NumPy que contiene los datos de la señal de audio y la tasa de muestreo con la que fue grabado el archivo. La tasa de muestreo es la cantidad de muestras por segundo que se toman del audio, y se mantiene intacta (sin cambios) al cargar el archivo.
+
+La otra función, `playAudio`, se encarga de reproducir el audio que ha sido cargado. Esta función utiliza la biblioteca `sounddevice` para enviar los datos de audio al dispositivo de salida, como los altavoces o auriculares. La función recibe los datos de audio y la tasa de muestreo, los cuales son necesarios para que la reproducción sea precisa. Además, se incluye un comando para esperar hasta que la reproducción del audio haya terminado antes de proceder con cualquier otra operación en el código.
 
 ```c
+# Archivos de voces y ruidos ya cargados
+audio_voces = ["voz_mama.wav", "voz_mari.wav"]
+audio_ruido = ["Ruidomama.wav", "ruidomari.wav"]
 
+# Función para cargar un archivo de audio
+def loadAudio(archivo):
+    data, samplerate = librosa.load(archivo, sr=None)  # Carga el archivo de audio sin cambio de tasa de muestreo
+    return data, samplerate
+
+# Función para reproducir un audio
+def playAudio(data, sr):
+    sd.play(data, sr)  # Reproduce el audio
+    sd.wait()  # Espera a que termine la reproducción
 ```
 
 <a name="onda"></a> 
 ## Graficas de onda del audio
 
-```c
+La función `graficarSonido` está diseñada para crear una visualización de la forma de onda de un archivo de audio. En primer lugar, la función calcula el tiempo en segundos para cada muestra de audio. Esto se realiza generando un array de índices que representan cada muestra en el archivo y dividiendo estos índices por la tasa de muestreo, `sr`. El resultado es un array que indica el tiempo correspondiente a cada muestra, permitiendo que el eje x del gráfico represente el tiempo en segundos.
 
+Luego, la función crea una figura de tamaño 12x6 pulgadas para la visualización. Utiliza `matplotlib` para graficar los datos de audio, donde el eje x muestra el tiempo y el eje y muestra la amplitud de la señal. La línea del gráfico se dibuja en color azul con un grosor de 1.5 puntos. Para enfocar la visualización, el eje x se limita a los primeros 2 segundos del audio, lo que es útil si se desea examinar solo una parte específica de la señal.
+
+```c
+# Función para graficar la forma de onda del audio
+def graficarSonido(data, sr, title=""):
+    t = np.arange(len(data)) / sr  # Calcula el tiempo en segundos
+    plt.figure(figsize=(12, 6))  # Tamaño de la figura
+    plt.plot(t, data, color='royalblue', lw=1.5)  # Grafica la forma de onda en color azul
+    plt.xlim(0, 2)  # Limita el eje x a los primeros 2 segundos
+    plt.xlabel('Tiempo (s)')
+    plt.ylabel('Amplitud')
+    plt.title(title)
+    plt.grid(True, linestyle='--', alpha=0.7)  # Añade una cuadrícula punteada
+    plt.show()
 ```
 
 <a name="espectro"></a> 
+## Espectro de frecuencia
+
+La función `analisisEspectral` está diseñada para analizar y visualizar el espectro de frecuencias de una señal de audio. Primero, la función calcula el número total de muestras del audio mediante `n = len(data)`. También determina el intervalo de muestreo `T`, que es el inverso de la tasa de muestreo `sr`, indicando el tiempo entre cada muestra.
+
+La función luego aplica la Transformada Rápida de Fourier (FFT) a los datos de audio con `np.fft.fft(data)`. La FFT convierte la señal del dominio del tiempo al dominio de la frecuencia, permitiendo analizar las frecuencias presentes en el audio. Para obtener las frecuencias correspondientes a la FFT, se usa `np.fft.fftfreq(n, T)`, y se toma solo la primera mitad de las frecuencias (`[:n // 2]`), ya que la FFT produce una imagen simétrica en el dominio de la frecuencia.
+
+- Transformada rápida de Fourier FFT: Es un algoritmo utilizado para calcular la transformada discreta de Fourier (DFT) y su inversa de manera más eficiente. La DFT es una transformada utilizada en el procesamiento de señales y de imágenes, entre muchas otras áreas, para transformar una señal discreta en su representación en el dominio de la frecuencia. La FFT acelera el proceso de cálculo de la DFT, lo que permite su uso en aplicaciones en tiempo real y para grandes conjuntos de datos.
+
+```c
+# Función para analizar el espectro de frecuencias del audio
+def analisisEspectral(data, sr, title="Espectro de frecuencias del audio"):
+    n = len(data)  # Número de muestras
+    T = 1 / sr  # Intervalo de muestreo
+    yf = np.fft.fft(data)  # Transformada de Fourier del audio
+    xf = np.fft.fftfreq(n, T)[:n // 2]  # Frecuencias correspondientes a la FFT
+    
+    plt.figure(figsize=(12, 6))  # Tamaño de la figura
+    plt.plot(xf, 2.0 / n * np.abs(yf[:n // 2]), color='darkorange', lw=1.5)  # Grafica el espectro en color naranja
+    plt.xlim(0, 2000)  # Limita el eje x a 2000 Hz
+    plt.xlabel('Frecuencia (Hz)')
+    plt.ylabel('Amplitud')
+    plt.title(title)
+    plt.grid(True, linestyle='--', alpha=0.7)  # Añade una cuadrícula punteada
+    plt.show()
+```
+
+<a name="mezcla"></a> 
 ## Mezcla archivos de audio
+
+
 
 ```c
 
