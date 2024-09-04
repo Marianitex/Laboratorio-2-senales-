@@ -53,6 +53,9 @@ El efecto de fiesta de cóctel es un fenómeno que consiste en enfocar la atenci
 
 Gracias a este fenómeno, somos capaces de diferenciar entre la voz de la persona con quien estamos manteniendo la conversación de la del resto de personas que puedan estar conformando el fondo acústico del ambiente en el que nos estamos encontrando.Este mismo fenómeno también es el que permite que, sin estar del todo concentrado en otras conversaciones, seamos capaces de captar la atención cuando se menciona una palabra que nos resulta importante, como puede ser el que nos llamen por nuestro nombre.
 
+<a name="configuracion"></a> 
+## Configuracion del sistema
+
 En este caso como fue mencionado en la introduccion se debia realizar con 3 personas, en un inicio el laboratorio si se hizo de esa manera pero los audios tomados fueron de un tiempo muy bajo (1 segundo), por esta razon al no obtener un buen muestro decidio realizarse una nueva toma con 2 personas de  la siguiente manera:
 
 Las personas se organizaron una en frente de la otra con una distancia de 27,9 cm equivalemte a lo que mide una hoja carta de largo desde los pies de la persona 1 al celular 1, luego otra hoja desde el celular 1 al celular 2 y una ultima hoja desde el celular 2 a la persona 2. 
@@ -83,5 +86,32 @@ https://github.com/user-attachments/assets/880810c3-7b88-43a7-87cd-1a991a7554f7
 Dialogo: Mi mamá se llama Lilia Vasquez, yo tengo 51 años y mi nombre es Lilian Caicedo.
 
 https://github.com/user-attachments/assets/ca4394b2-ae84-47e0-8e82-1a0b656d8360
+
+<a name="librerias"></a> 
+## Librerias
+```c
+import matplotlib.pyplot as plt
+import numpy as np
+import librosa
+import sounddevice as sd
+from sklearn.decomposition import FastICA
+```
+1. Librosa: Es una biblioteca especializada en el procesamiento de señales de audio. Es ampliamente utilizada para tareas como la extracción de características de audio, la generación de espectrogramas, y la manipulación de archivos de audio.
+
+2. SoundDevice: Es una biblioteca que permite la grabación y reproducción de audio directamente desde Python usando dispositivos de audio.
+
+3. FastICA (de sklearn.decomposition): Es una implementación del algoritmo de Análisis de Componentes Independientes (ICA) en la biblioteca scikit-learn. ICA es una técnica de separación de fuentes ciega (BSS) que intenta descomponer una señal multivariable en componentes estadísticamente independientes.
+
+```c
+
+```
+
+
+
+
+
+
+
+
 
 
