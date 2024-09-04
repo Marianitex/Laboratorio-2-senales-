@@ -67,19 +67,21 @@ Para la grabacion la frecuencia de muestreo fue de 16 kHz en cada celular, se gr
 
 ![Agregar](frecuencia.jpg)
 
-1. Dialogo persona 1  (Mariana):
-
-Mi nombre es Mariana Higuera, tengo 18 años y mi mamá se llama Lilian Caicedo.
+1. Audios persona 1  (Mariana):
 
 
+https://github.com/user-attachments/assets/e087082f-2b14-4eb6-b42e-ab8e2317dc59
 
-https://github.com/user-attachments/assets/e96a3493-853e-496a-ad59-56d1f9f1da32
+Dialogo: Mi nombre es Mariana Higuera, tengo 18 años y mi mamá se llama Lilian Caicedo.
 
+https://github.com/user-attachments/assets/cd83c1c9-4014-4715-8696-32f6dae8d133
 
+2. Audio persona 2 (Mamá):
 
-2. Dialogo persona 2 (Mamá):
+https://github.com/user-attachments/assets/880810c3-7b88-43a7-87cd-1a991a7554f7
 
-Mi mamá se llama Lilia Vasquez, yo tengo 51 años y mi nombre es Lilian Caicedo.
+Dialogo: Mi mamá se llama Lilia Vasquez, yo tengo 51 años y mi nombre es Lilian Caicedo.
 
+https://github.com/user-attachments/assets/ca4394b2-ae84-47e0-8e82-1a0b656d8360
 
 
