@@ -300,11 +300,11 @@ Luego, se calcula la potencia de cada señal utilizando la función `potenciaDeS
 
 Con las potencias calculadas, se procede a calcular el SNR en decibelios usando la fórmula:
 
-\[ \text{SNR (dB)} = 10 \times \log_{10}\left(\frac{\text{potencia\_voz}}{\text{potencia\_ruido}}\right) \]
+![Agregar](potencia.png)
+
 
 La función `np.log10` calcula el logaritmo en base 10, y el resultado se multiplica por 10 para expresar el SNR en decibelios.
 
-Finalmente, el valor calculado del SNR se imprime en la consola. La impresión se realiza utilizando una cadena de formato que muestra el nombre del archivo de voz y el valor del SNR con dos decimales. Esto proporciona una manera clara y directa de visualizar la calidad de la señal de voz en relación con el ruido para cada par de archivos analizados.
 
 ```c
 # Función para calcular la relación señal-ruido (SNR) para cada archivo
@@ -316,12 +316,6 @@ def opcion_calcular_snr():
         snr = 10.0 * np.log10(potencia_voz / potencia_ruido)  # Calcula el SNR en decibelios
         print(f"SNR para {audio_voces[i]}: {snr:.2f} dB")
 ```
-
-
-
-
-
-
 
 <a name="menu"></a> 
 ## Menu
