@@ -267,12 +267,33 @@ def identificar_voz(components, sr):
     return components[:, seleccion]  # Devuelve la componente seleccionada
 ```
 
+-Graficas voz separada y espectro voz separada mama:
+
+![Agregar](vozseparadamama.png)
+
+![Agregar](espectroseparadamama.png)
+
+-Graficas voz separada y espectro voz separada mari:
+
+![Agregar](vozseparadamari.png)
+
+![Agregar](espectroseparadamari.png)
+
+
 <a name="snr"></a> 
 ## Calculo SNR voces separadas
+
+
 
 ```c
 
 ```
+
+
+
+
+
+
 
 <a name="menu"></a> 
 ## Menu
