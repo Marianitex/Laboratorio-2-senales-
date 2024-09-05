@@ -493,9 +493,24 @@ if __name__ == "__main__":
 <a name="analisis"></a> 
 ## Analisis
 
-```c
+![Agregar](analisis.png)
 
-```
+### Análisis de la imagen:
+
+#### Parte superior (Ondas en el tiempo):
+En la parte superior de la imagen, se visualizan tres señales de audio, representadas en el dominio del tiempo. Las dos primeras gráficas muestran las **señales mezcladas** ("Mezcla mama" y "Mezcla mari"), que son combinaciones de dos fuentes de audio (probablemente voces) con ruido adicional. Estas señales son más caóticas debido a la combinación de múltiples fuentes, lo que sugiere la interferencia entre las voces y el ruido. En la tercera gráfica, se muestra la **voz separada de Mari**, que tiene una forma de onda más limpia y regular. Esto indica que, tras aplicar un algoritmo de **Análisis de Componentes Independientes (ICA)** o alguna técnica relacionada, se ha conseguido extraer la señal de la voz de Mari de manera efectiva, reduciendo el ruido y las interferencias de otras fuentes.
+
+Este comportamiento es consistente con el método de separación de señales mencionado en el primer archivo proporcionado, que habla sobre el uso del ICA para separar señales que han sido mezcladas en el dominio temporal. La principal idea del ICA es que las señales independientes pueden separarse mediante la maximización de su independencia estadística, lo cual parece haberse logrado en la gráfica de la señal separada de Mari.
+
+#### Parte inferior (Espectros de frecuencia):
+En la parte inferior de la imagen, se presentan los **espectros de frecuencia** de las señales mostradas arriba. El espectro de frecuencia permite analizar cómo la energía de una señal está distribuida a través de diferentes frecuencias. Los primeros dos gráficos muestran los **espectros de las señales mezcladas** ("mezcla mama" y "mezcla mari"). Ambos espectros muestran picos en diferentes bandas de frecuencia, lo cual indica que las señales mezcladas contienen componentes tanto de las voces como del ruido. La mezcla de estas señales en el espectro de frecuencia puede complicar el proceso de separación, ya que no siempre es trivial distinguir entre los componentes de voz y los de ruido.
+
+El tercer gráfico muestra el **espectro de la voz separada de Mari**. Aquí, los picos más altos en el espectro corresponden a las frecuencias características de la voz humana, y la presencia de ruido es notablemente menor en comparación con las mezclas originales. Esto sugiere que el método de separación ha logrado atenuar significativamente el ruido, permitiendo una extracción más pura de la señal de voz. Según el primer archivo, uno de los objetivos del análisis de señales y muestreo compresivo es recuperar señales de audio limpias en situaciones donde haya interferencias, lo que se refleja claramente en esta parte del análisis.
+
+#### Relación con los valores de SNR:
+La Relación Señal a Ruido (SNR) es una métrica clave para evaluar la calidad de la separación de señales. Los valores de SNR proporcionados indican lo bien que el algoritmo ha separado la señal deseada del ruido. Para las primeras dos señales separadas, los valores de SNR son **44.62 dB** y **45.37 dB**, lo que representa una separación de alta calidad con muy poco ruido residual. Estos valores son consistentes con lo que se espera en una separación de señales efectiva, como se menciona en el archivo sobre el uso del ICA para extraer señales de audio. El archivo también menciona cómo el rendimiento del sistema se puede evaluar mediante medidas como el SNR.
+
+Sin embargo, el tercer valor de SNR para la señal "voz_mari.wav" es de **18.38 dB**, un valor considerablemente más bajo. Esto indica que, aunque la señal fue separada, aún existe un nivel más alto de ruido en la señal final en comparación con las otras dos. El primer archivo sugiere que las técnicas de procesamiento pueden verse limitadas por la complejidad de las señales mezcladas, lo cual podría explicar este valor más bajo de SNR.
 
 <a name="contacto"></a> 
 ## Contacto
