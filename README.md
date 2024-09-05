@@ -219,6 +219,7 @@ def mezclarVoces(audio1, audio2):
     return mixed_signals.T, sr  # Transpone la matriz para tener las señales en columnas
 ```
 - Graficas mezcla y espectro mezcla mama:
+- 
 ![Agregar](mezclamama.png)
 
 ![Agregar](espectromezclamama.png)
