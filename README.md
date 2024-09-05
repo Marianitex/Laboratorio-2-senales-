@@ -67,7 +67,7 @@ La grabacion se realizo en este caso por medio una aplicacion llamada "Grabadora
 
 ![Agregar](grabadora.jpg)
 
-Para la grabacion la frecuencia de muestreo fue de 16 kHz en cada celular, se grabaron 5 segundos del ruido del ambiente y 4 segundos a las personas hablando.
+Para la grabacion la frecuencia de muestreo fue de 16 kHz en cada celular, se grabaron 5 segundos del ruido del ambiente y 5 segundos a las personas hablando.
 
 ![Agregar](frecuencia.jpg)
 
@@ -287,7 +287,7 @@ El **Análisis de Componentes Independientes (ICA)** funciona a través de un pr
    - **A** es una matriz de mezcla desconocida que representa cómo se combinan las señales independientes.
    - **S** son las señales originales independientes que queremos recuperar.
 
-1. **Objetivo del ICA**:
+2. **Objetivo del ICA**:
    El objetivo del ICA es encontrar una matriz **W** que sea la inversa de la matriz de mezcla **A**, lo que permitirá obtener las señales originales separadas **S** a partir de las señales observadas **X**. Esto se logra mediante la ecuación:
    
 ![Agregar](ica2.png)
@@ -304,14 +304,14 @@ El **Análisis de Componentes Independientes (ICA)** funciona a través de un pr
    Antes de aplicar el algoritmo ICA, las señales suelen ser **normalizadas** o **blanqueadas** (whitening). Esto significa que las señales mezcladas se transforman para tener una **varianza unitaria** y **covarianza cero**, lo que facilita el cálculo de la matriz de mezcla **W**. Este paso asegura que las componentes tengan independencia, eliminando cualquier correlación lineal.
 
 6. **Algoritmo iterativo**:
-   El ICA se resuelve a menudo a través de algoritmos iterativos que ajustan gradualmente la matriz **W** hasta que se maximiza la independencia de las señales separadas. Algunos de los algoritmos populares utilizados para ICA son **FastICA** y **InfoMax**. Estos métodos ajustan los pesos con base en la información estadística de las señales mezcladas.
+   El ICA se resuelve a menudo a través de algoritmos iterativos que ajustan gradualmente la matriz **W** hasta que se maximiza la independencia de las señales separadas. Algunos de los algoritmos populares utilizados para ICA son **FastICA** e **InfoMax**. Estos métodos ajustan los pesos con base en la información estadística de las señales mezcladas.
 - **Graficas voz separada y espectro voz separada mama**:
 
 ![Agregar](vozseparadamama.png)
 
 ![Agregar](espectroseparadamama.png)
 
--**SNR para la voz separada**: 44.62 dB, es un valor bastante alto que indica una excelente calidad de la señal de audio. En términos simples, el SNR mide la relación entre la intensidad de la señal deseada (en este caso, la voz) y el nivel de ruido de fondo. Un SNR alto, sugiere que la señal de voz es mucho más fuerte que el ruido, lo que significa que el ruido tiene una presencia mínima en la señal final.
+-**SNR relacion señal ruido mama**: 44.62 dB, es un valor bastante alto que indica una excelente calidad de la señal de audio. En términos simples, el SNR mide la relación entre la intensidad de la señal deseada (en este caso, la voz) y el nivel de ruido de fondo. Un SNR alto, sugiere que la señal de voz es mucho más fuerte que el ruido, lo que significa que el ruido tiene una presencia mínima en la señal final.
 
 Este nivel de SNR implica que la voz separada es clara y bien distinguible, con poco impacto del ruido. Esto es crucial en aplicaciones de procesamiento de audio y comunicación, donde es importante mantener la claridad de la voz. En general, los valores de SNR más altos corresponden a una mejor calidad de la señal, con menos interferencia del ruido.
 
@@ -321,7 +321,7 @@ Este nivel de SNR implica que la voz separada es clara y bien distinguible, con 
 
 ![Agregar](espectroseparadamari.png)
 
--**SNR para la voz separada**: 45.37 dB, es aún mejor que el valor anterior de 44.62 dB, y sigue indicando una calidad de señal excepcionalmente alta. Este valor sugiere que la señal de voz es extremadamente clara en comparación con el nivel de ruido de fondo.
+-**SNR relacion señal ruido mari**: 45.37 dB, es aún mejor que el valor anterior de 44.62 dB, y sigue indicando una calidad de señal excepcionalmente alta. Este valor sugiere que la señal de voz es extremadamente clara en comparación con el nivel de ruido de fondo.
 
 Con un SNR de 45.37 dB, la voz separada es muy nítida, con el ruido presente en la señal siendo casi imperceptible. En términos prácticos, esto significa que la calidad de la señal de voz es excelente, y el ruido tiene un impacto insignificante, si es que se percibe en absoluto. Este alto SNR es indicativo de una separación de señales muy efectiva y de un procesamiento de audio de alta calidad.
 
@@ -554,17 +554,7 @@ La Relación Señal a Ruido (SNR) es una métrica clave para evaluar la calidad 
 
 Sin embargo, el tercer valor de SNR para la señal "voz_mari.wav" es de **18.38 dB**, un valor considerablemente más bajo. Esto indica que, aunque la señal fue separada, aún existe un nivel más alto de ruido en la señal final en comparación con las otras dos. El primer archivo sugiere que las técnicas de procesamiento pueden verse limitadas por la complejidad de las señales mezcladas, lo cual podría explicar este valor más bajo de SNR.
 
+
 <a name="contacto"></a> 
 ## Contacto
 * Creado por [Marianitex](https://github.com/Marianitex) - sígueme en mis redes sociales como @_mariana.higuera
-
-
-
-
-
-
-
-
-
-
-
