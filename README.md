@@ -31,15 +31,15 @@ aplicaciones como la mejora de la voz, el reconocimiento de habla y la cancelaci
 
 Para este laboratorio, los estudiantes recrearán el problema de la fiesta de coctel, donde existen 𝑛 fuentes sonoras capturadas por un arreglo de 𝑛 
 micrófonos de acuerdo con la siguiente metodología. 
-1. Configuración del sistema: 
+1. **Configuración del sistema**: 
 - Conecta los tres micrófonos al sistema de adquisición de datos y distribuyéndolos estratégicamente en la sala. Los micrófonos deben estar ubicados de manera que cada uno capture diferentes combinaciones de las señales provenientes de las tres fuentes.
 - Ubicar tres personas en posiciones fijas dentro de la sala de laboratorio.
 - Deben estar localizados a distancias diferentes y orientados en distintas direcciones para simular un entorno de "fiesta de cóctel". 
-2. Captura de la señal:
+2. **Captura de la señal**:
 - Generar la señal mediante la voz de los tres sujetos de prueba; cada uno debe decir una frase diferente durante el tiempo de captura de la señal. Las señales de los micrófonos deben ser registradas por el sistema de adquisición y guardas para ser analizadas.
 - Grabar el ruido de la sala con los 3 micrófonos y calcular el SNR de cada señal. Repetir la medición en caso de que el SNR de alguna de las señales 
 no sea suficiente. Argumentar las razones. 
-3. Procesamiento de señales: 
+3. **Procesamiento de señales**: 
 - Realizar un análisis temporal y espectral de las señales capturadas por cada micrófono, identificando las características principales de cada fuente
 sonora. Para realizar el análisis espectral, se recomienda utilizar la transformada de Fourier discreta (DFT) o la transformada rápida de Fourier (FFT),
 describiendo la información que se puede obtener con cada una de ellas.
@@ -71,20 +71,20 @@ Para la grabacion la frecuencia de muestreo fue de 16 kHz en cada celular, se gr
 
 ![Agregar](frecuencia.jpg)
 
-1. Audios persona 1  (Mariana):
+1. **Audios persona 1  (Mariana)**:
 
 
 https://github.com/user-attachments/assets/e087082f-2b14-4eb6-b42e-ab8e2317dc59
 
-Dialogo: Mi nombre es Mariana Higuera, tengo 18 años y mi mamá se llama Lilian Caicedo.
+**Dialogo**: Mi nombre es Mariana Higuera, tengo 18 años y mi mamá se llama Lilian Caicedo.
 
 https://github.com/user-attachments/assets/cd83c1c9-4014-4715-8696-32f6dae8d133
 
-2. Audio persona 2 (Mamá):
+2. **Audio persona 2 (Mamá)**:
 
 https://github.com/user-attachments/assets/880810c3-7b88-43a7-87cd-1a991a7554f7
 
-Dialogo: Mi mamá se llama Lilia Vasquez, yo tengo 51 años y mi nombre es Lilian Caicedo.
+**Dialogo**: Mi mamá se llama Lilia Vasquez, yo tengo 51 años y mi nombre es Lilian Caicedo.
 
 https://github.com/user-attachments/assets/ca4394b2-ae84-47e0-8e82-1a0b656d8360
 
@@ -97,13 +97,13 @@ import librosa
 import sounddevice as sd
 from sklearn.decomposition import FastICA
 ```
-1. Librosa: Es una biblioteca especializada en el procesamiento de señales de audio. Es ampliamente utilizada para tareas como la extracción de características de audio, la generación de espectrogramas, y la manipulación de archivos de audio.
+1. **Librosa**: Es una biblioteca especializada en el procesamiento de señales de audio. Es ampliamente utilizada para tareas como la extracción de características de audio, la generación de espectrogramas, y la manipulación de archivos de audio.
 
-2. SoundDevice: Es una biblioteca que permite la grabación y reproducción de audio directamente desde Python usando dispositivos de audio.
+2. **SoundDevice**: Es una biblioteca que permite la grabación y reproducción de audio directamente desde Python usando dispositivos de audio.
 
-3. FastICA (de sklearn.decomposition): Es una implementación del algoritmo de Análisis de Componentes Independientes (ICA) en la biblioteca scikit-learn. ICA es una técnica de separación de fuentes ciega (BSS) que intenta descomponer una señal multivariable en componentes estadísticamente independientes.
+3. **FastICA (de sklearn.decomposition)**: Es una implementación del algoritmo de Análisis de Componentes Independientes (ICA) en la biblioteca scikit-learn. ICA es una técnica de separación de fuentes ciega (BSS) que intenta descomponer una señal multivariable en componentes estadísticamente independientes.
 
-- Compatibilidad y Estandarización: .wav es un formato ampliamente compatible con diversas herramientas y bibliotecas de procesamiento de audio, incluidas librosa y sounddevice, que se utilizan en este código. Esto asegura que no haya problemas de compatibilidad al cargar o reproducir archivos de audio.
+- **Compatibilidad y Estandarización**: .wav es un formato ampliamente compatible con diversas herramientas y bibliotecas de procesamiento de audio, incluidas librosa y sounddevice, que se utilizan en este código. Esto asegura que no haya problemas de compatibilidad al cargar o reproducir archivos de audio.
 
 <a name="carga"></a> 
 ## Cargar audios de voces y ruidos
@@ -162,7 +162,7 @@ La función `analisisEspectral` está diseñada para analizar y visualizar el es
 
 La función luego aplica la Transformada Rápida de Fourier (FFT) a los datos de audio con `np.fft.fft(data)`. La FFT convierte la señal del dominio del tiempo al dominio de la frecuencia, permitiendo analizar las frecuencias presentes en el audio. Para obtener las frecuencias correspondientes a la FFT, se usa `np.fft.fftfreq(n, T)`, y se toma solo la primera mitad de las frecuencias (`[:n // 2]`), ya que la FFT produce una imagen simétrica en el dominio de la frecuencia.
 
-- Transformada rápida de Fourier FFT: Es un algoritmo utilizado para calcular la transformada discreta de Fourier (DFT) y su inversa de manera más eficiente. La DFT es una transformada utilizada en el procesamiento de señales y de imágenes, entre muchas otras áreas, para transformar una señal discreta en su representación en el dominio de la frecuencia. La FFT acelera el proceso de cálculo de la DFT, lo que permite su uso en aplicaciones en tiempo real y para grandes conjuntos de datos.
+- **Transformada rápida de Fourier FFT**: Es un algoritmo utilizado para calcular la transformada discreta de Fourier (DFT) y su inversa de manera más eficiente. La DFT es una transformada utilizada en el procesamiento de señales y de imágenes, entre muchas otras áreas, para transformar una señal discreta en su representación en el dominio de la frecuencia. La FFT acelera el proceso de cálculo de la DFT, lo que permite su uso en aplicaciones en tiempo real y para grandes conjuntos de datos.
 
 ```c
 # Función para analizar el espectro de frecuencias del audio
@@ -218,13 +218,13 @@ def mezclarVoces(audio1, audio2):
     mixed_signals = np.vstack(signals)
     return mixed_signals.T, sr  # Transpone la matriz para tener las señales en columnas
 ```
-- Graficas mezcla y espectro mezcla mama:
+- **Graficas mezcla y espectro mezcla mama**:
 - 
 ![Agregar](mezclamama.png)
 
 ![Agregar](espectromezclamama.png)
 
-- Grficas mezcla y espectro mezcla mari:
+- **Graficas mezcla y espectro mezcla mari**:
 
 ![Agregar](mezclamari.png)
 
@@ -298,23 +298,23 @@ El **Análisis de Componentes Independientes (ICA)** funciona a través de un pr
 
 6. **Algoritmo iterativo**:
    El ICA se resuelve a menudo a través de algoritmos iterativos que ajustan gradualmente la matriz **W** hasta que se maximiza la independencia de las señales separadas. Algunos de los algoritmos populares utilizados para ICA son **FastICA** y **InfoMax**. Estos métodos ajustan los pesos con base en la información estadística de las señales mezcladas.
-- Graficas voz separada y espectro voz separada mama:
+- **Graficas voz separada y espectro voz separada mama**:
 
 ![Agregar](vozseparadamama.png)
 
 ![Agregar](espectroseparadamama.png)
 
--SNR para la voz separada: 44.62 dB, es un valor bastante alto que indica una excelente calidad de la señal de audio. En términos simples, el SNR mide la relación entre la intensidad de la señal deseada (en este caso, la voz) y el nivel de ruido de fondo. Un SNR alto, sugiere que la señal de voz es mucho más fuerte que el ruido, lo que significa que el ruido tiene una presencia mínima en la señal final.
+-**SNR para la voz separada**: 44.62 dB, es un valor bastante alto que indica una excelente calidad de la señal de audio. En términos simples, el SNR mide la relación entre la intensidad de la señal deseada (en este caso, la voz) y el nivel de ruido de fondo. Un SNR alto, sugiere que la señal de voz es mucho más fuerte que el ruido, lo que significa que el ruido tiene una presencia mínima en la señal final.
 
 Este nivel de SNR implica que la voz separada es clara y bien distinguible, con poco impacto del ruido. Esto es crucial en aplicaciones de procesamiento de audio y comunicación, donde es importante mantener la claridad de la voz. En general, los valores de SNR más altos corresponden a una mejor calidad de la señal, con menos interferencia del ruido.
 
-- Graficas voz separada y espectro voz separada mari:
+- **Graficas voz separada y espectro voz separada mari**:
 
 ![Agregar](vozseparadamari.png)
 
 ![Agregar](espectroseparadamari.png)
 
--SNR para la voz separada: 45.37 dB, es aún mejor que el valor anterior de 44.62 dB, y sigue indicando una calidad de señal excepcionalmente alta. Este valor sugiere que la señal de voz es extremadamente clara en comparación con el nivel de ruido de fondo.
+-**SNR para la voz separada**: 45.37 dB, es aún mejor que el valor anterior de 44.62 dB, y sigue indicando una calidad de señal excepcionalmente alta. Este valor sugiere que la señal de voz es extremadamente clara en comparación con el nivel de ruido de fondo.
 
 Con un SNR de 45.37 dB, la voz separada es muy nítida, con el ruido presente en la señal siendo casi imperceptible. En términos prácticos, esto significa que la calidad de la señal de voz es excelente, y el ruido tiene un impacto insignificante, si es que se percibe en absoluto. Este alto SNR es indicativo de una separación de señales muy efectiva y de un procesamiento de audio de alta calidad.
 
@@ -351,11 +351,11 @@ def opcion_calcular_snr():
 SNR para voz_mama.wav: 15.20 dB
 SNR para voz_mari.wav: 18.38 dB
 ### **Análisis del SNR**
-1. SNR para voz_mama.wav: 15.20 dB
+1. **SNR para voz_mama.wav**: 15.20 dB
 
 Un SNR de 15.20 dB indica que la señal de voz en el archivo voz_mama.wav es más fuerte que el ruido, pero el nivel de ruido es todavía notable en comparación con la señal. Este valor se encuentra en el rango donde la señal es audiblemente clara pero el ruido es perceptible. En aplicaciones prácticas, esto podría significar que la calidad del audio es aceptable pero podría haber una cierta interferencia o distracción causada por el ruido.
 
-2. SNR para voz_mari.wav: 18.38 dB
+2. **SNR para voz_mari.wav**: 18.38 dB
 
 Un SNR de 18.38 dB es superior al valor anterior y sugiere que la señal de voz en el archivo voz_mari.wav es aún más clara en comparación con el ruido. Aunque el ruido sigue presente, su impacto es menor en comparación con voz_mama.wav. Este valor de SNR indica una mejor calidad de la señal, con la voz siendo más prominente y menos afectada por el ruido de fondo. La calidad es bastante buena, y la interferencia del ruido es menos significativa.
 
