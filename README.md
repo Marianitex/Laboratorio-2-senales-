@@ -320,7 +320,159 @@ def opcion_calcular_snr():
 <a name="menu"></a> 
 ## Menu
 
+### **Menú Interactivo**
+
+La función `mostrar_menu` muestra un menú con opciones disponibles para el usuario. Cada opción corresponde a una funcionalidad específica relacionada con el procesamiento de archivos de audio, como cargar y reproducir un archivo, graficar y analizar el espectro de un archivo, mezclar voz y ruido, aplicar ICA para separar señales, calcular la relación señal-ruido (SNR), o salir del programa. El menú ofrece una forma clara de seleccionar la acción deseada.
+
+### **Selección de Archivos de Audio**
+
+La función `seleccionar_audio` permite al usuario elegir un archivo de audio de una lista. Imprime las opciones disponibles y solicita al usuario que seleccione un archivo mediante un número. Después de la selección, la función valida la opción elegida y devuelve el archivo seleccionado. Si la opción no es válida, la función muestra un mensaje de error y devuelve `None`. Esta función es útil para interactuar con listas de archivos y seleccionar el archivo que se desea procesar.
+
+### **Carga y Reproducción de Audio**
+
+La función `opcion_cargar_reproducir` utiliza `seleccionar_audio` para elegir un archivo de voz y luego carga y reproduce el archivo seleccionado. La carga se realiza mediante la función `loadAudio`, y la reproducción se lleva a cabo con la función `playAudio`. Esto permite al usuario escuchar el archivo de audio elegido.
+
+### **Gráfica y Análisis Espectral**
+
+La función `opcion_graficar_analizar` también utiliza `seleccionar_audio` para elegir un archivo de voz. Una vez seleccionado, la función carga el archivo y genera dos tipos de análisis: una gráfica de la forma de onda utilizando `graficarSonido` y un análisis espectral usando `analisisEspectral`. Esto proporciona una representación visual de la señal y su contenido en frecuencia.
+
+### **Mezcla de Voz y Ruido**
+
+La función `opcion_mezclar` permite al usuario seleccionar archivos de voz y ruido, y luego mezcla estas señales utilizando la función `mezclarVoces`. La señal mezclada se grafica y analiza espectralmente, y luego se reproduce. Este proceso muestra cómo la voz y el ruido se combinan en un solo archivo de audio.
+
+### **Aplicación de ICA y Separación de Señales**
+
+La función `opcion_aplicar_ica` utiliza ICA para separar las señales de voz y ruido. Primero, mezcla las señales seleccionadas, aplica ICA para separar las componentes y luego identifica cuál de las componentes es la voz usando `identificar_voz`. La voz separada se grafica y se analiza espectralmente, y se reproduce. Además, calcula el SNR de la voz separada en comparación con el ruido original, mostrando así la calidad de la separación.
+
+### **Cálculo del SNR para Cada Archivo**
+
+La función `opcion_calcular_snr` calcula el SNR para cada archivo de voz en la lista `audio_voces` en comparación con los archivos de ruido en `audio_ruido`. Para cada par de archivos, calcula la potencia de la voz y del ruido, y luego determina el SNR en decibelios. Este cálculo ayuda a evaluar la calidad de la señal de voz en comparación con el ruido.
+
+### **Bucle Principal del Menú**
+
+La función `main` contiene el bucle principal del programa, que muestra el menú y ejecuta la opción seleccionada por el usuario. El bucle continúa ejecutándose hasta que el usuario elige la opción de salir (`6`). Dependiendo de la opción seleccionada, llama a la función correspondiente (`opcion_cargar_reproducir`, `opcion_graficar_analizar`, etc.). Si el usuario ingresa una opción no válida, se muestra un mensaje de error. Al seleccionar salir, el bucle se rompe y el programa termina.
+
+### **Ejecución del Programa**
+
+Finalmente, el bloque `if __name__ == "__main__":` asegura que la función `main` se ejecute solo si el script se ejecuta directamente, y no cuando se importe como un módulo en otro script.
+
 ```c
+# Menú interactivo para seleccionar opciones
+def mostrar_menu():
+    print("\nMenú de Opciones:")
+    print("1. Cargar y reproducir un archivo de audio")
+    print("2. Graficar y analizar espectralmente un archivo de audio")
+    print("3. Mezclar voz y ruido")
+    print("4. Aplicar ICA para separar señales")
+    print("5. Calcular SNR (Relación Señal-Ruido)")
+    print("6. Salir")
+
+# Función para seleccionar un archivo de audio de una lista
+def seleccionar_audio(lista_audios, tipo):
+    print(f"\nSeleccione un {tipo}:")
+    for i, archivo in enumerate(lista_audios):
+        print(f"{i+1}. {archivo}")
+    
+    seleccion = int(input("Seleccione una opción (1-3): ")) - 1
+    if seleccion < 0 or seleccion >= len(lista_audios):
+        print("Opción no válida.")
+        return None
+    return lista_audios[seleccion]  # Devuelve el archivo seleccionado
+
+# Función para cargar y reproducir un archivo de audio
+def opcion_cargar_reproducir():
+    archivo = seleccionar_audio(audio_voces, "archivo de voz")
+    if archivo:
+        data, sr = loadAudio(archivo)
+        playAudio(data, sr)
+
+# Función para graficar y analizar un archivo de audio
+def opcion_graficar_analizar():
+    archivo = seleccionar_audio(audio_voces, "archivo de voz")
+    if archivo:
+        data, sr = loadAudio(archivo)
+        graficarSonido(data, sr, title=f"Forma de onda de {archivo}")
+        analisisEspectral(data, sr, title=f"Espectro de {archivo}")
+
+# Función para mezclar un archivo de voz y un archivo de ruido
+def opcion_mezclar():
+    voz = seleccionar_audio(audio_voces, "voz")
+    ruido = seleccionar_audio(audio_ruido, "ruido")
+    
+    if voz and ruido:
+        data_mezclada, sr_mezclada = mezclarVoces(voz, ruido)
+        graficarSonido(data_mezclada[:, 0], sr_mezclada, "Señal mezclada - Voz y Ruido")
+        analisisEspectral(data_mezclada[:, 0], sr_mezclada, "Espectro - Señal mezclada")
+        playAudio(data_mezclada[:, 0], sr_mezclada)
+
+# Función para aplicar ICA y separar la voz
+def opcion_aplicar_ica():
+    voz = seleccionar_audio(audio_voces, "voz")
+    ruido = seleccionar_audio(audio_ruido, "ruido")
+    
+    if voz and ruido:
+        data_mezclada, sr_mezclada = mezclarVoces(voz, ruido)
+        señales_separadas = aplicar_ica(data_mezclada)
+        
+        # Identificar y reproducir solo la componente que parece ser la voz
+        voz_separada = identificar_voz(señales_separadas, sr_mezclada)
+        if voz_separada is not None:
+            graficarSonido(voz_separada, sr_mezclada, "Voz Separada")
+            analisisEspectral(voz_separada, sr_mezclada, "Espectro de la voz separada")
+            print("Reproduciendo voz separada...")
+            playAudio(voz_separada, sr_mezclada)
+            
+            # Cargar el ruido original para el cálculo del SNR
+            ruido_original, sr_ruido = loadAudio(ruido)  # Cargar los datos de ruido
+            
+            # Ajustar el tamaño del ruido a la longitud de la voz separada
+            min_len = min(len(voz_separada), len(ruido_original))
+            voz_separada = voz_separada[:min_len]
+            ruido_original = ruido_original[:min_len]
+            
+            # Calcular la potencia de la voz separada y el ruido
+            potencia_voz_separada = np.var(voz_separada)  # Varianza como estimación de potencia
+            potencia_ruido = np.mean(ruido_original**2)  # Potencia del ruido
+            
+            # Calcular el SNR
+            snr = 10.0 * np.log10(potencia_voz_separada / potencia_ruido)
+            print(f"SNR para la voz separada: {snr:.2f} dB")
+
+# Función para calcular la relación señal-ruido (SNR) para cada archivo
+def opcion_calcular_snr():
+    for i in range(3):
+        voz, sr = loadAudio(audio_voces[i])
+        ruido, sr = loadAudio(audio_ruido[i])
+        potencia_voz, potencia_ruido = potenciaDeSeñal(voz, ruido)
+        snr = 10.0 * np.log10(potencia_voz / potencia_ruido)  # Calcula el SNR en decibelios
+        print(f"SNR para {audio_voces[i]}: {snr:.2f} dB")
+
+# Bucle principal del menú
+def main():
+    while True:
+        mostrar_menu()  # Muestra el menú de opciones
+        opcion = input("\nSeleccione una opción (1-6): ")
+        
+        # Ejecuta la opción seleccionada
+        if opcion == "1":
+            opcion_cargar_reproducir()
+        elif opcion == "2":
+            opcion_graficar_analizar()
+        elif opcion == "3":
+            opcion_mezclar()
+        elif opcion == "4":
+            opcion_aplicar_ica()
+        elif opcion == "5":
+            opcion_calcular_snr()
+        elif opcion == "6":
+            print("Saliendo...")
+            break  # Sale del bucle y termina el programa
+        else:
+            print("Opción no válida, intente de nuevo.")
+
+if __name__ == "__main__":
+    main()  # Ejecuta la función principal
+
 
 ```
 
