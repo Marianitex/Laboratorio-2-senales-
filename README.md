@@ -151,6 +151,10 @@ def graficarSonido(data, sr, title=""):
     plt.show()
 ```
 
+![Agregar](ondamama.png)
+
+![Agregar](ondamari.png)
+
 <a name="espectro"></a> 
 ## Espectro de frecuencia
 
