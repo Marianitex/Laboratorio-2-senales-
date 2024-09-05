@@ -298,6 +298,39 @@ Dentro del bucle, la función carga los datos de audio para la voz y el ruido co
 
 Luego, se calcula la potencia de cada señal utilizando la función `potenciaDeSeñal`, que toma como entrada los datos de `voz` y `ruido`. Esta función devuelve dos valores: `potencia_voz` y `potencia_ruido`, que representan la potencia de las señales de voz y ruido, respectivamente. La potencia se determina como el promedio del cuadrado de los valores de la señal.
 
+El **Análisis de Componentes Independientes (ICA)** funciona a través de un proceso matemático que busca descomponer una señal mixta (como una mezcla de sonidos o señales de diferentes fuentes) en sus componentes originales, asumiendo que estos componentes son estadísticamente independientes entre sí.
+
+### Pasos fundamentales del funcionamiento del ICA:
+
+1. **Mezcla de señales**:
+   Cuando diferentes señales independientes (por ejemplo, dos personas hablando al mismo tiempo) se capturan con un conjunto de sensores (micrófonos), estos capturan una mezcla lineal de todas las señales. Matemáticamente, la mezcla de señales se puede expresar como:
+   
+![Agregar](ica1.png)
+
+   Donde:
+   - **X** representa las señales observadas (mezcladas) por los sensores.
+   - **A** es una matriz de mezcla desconocida que representa cómo se combinan las señales independientes.
+   - **S** son las señales originales independientes que queremos recuperar.
+
+1. **Objetivo del ICA**:
+   El objetivo del ICA es encontrar una matriz **W** que sea la inversa de la matriz de mezcla **A**, lo que permitirá obtener las señales originales separadas **S** a partir de las señales observadas **X**. Esto se logra mediante la ecuación:
+   
+![Agregar](ica2.png)
+   
+   Aquí, **W** es la matriz de pesos que ICA calcula para realizar la separación.
+
+3. **Independencia estadística**:
+   La clave del proceso es la suposición de que las señales originales **S** son **independientes estadísticamente** entre sí. Esto significa que los valores de una señal no influyen en los valores de las otras señales. Para encontrar **W**, el algoritmo ICA maximiza esta independencia.
+
+4. **Maximización de la no-gaussianidad**:
+   Una característica importante es que ICA maximiza la **no-gaussianidad** de las señales separadas. Esto se debe a que, según el **teorema del límite central**, una mezcla de muchas señales independientes tiende a tener una distribución cercana a la gaussiana (campana). Por lo tanto, para recuperar las señales originales, ICA busca aquellas señales que son lo más no-gaussianas posibles.
+
+5. **Normalización y preprocesamiento (whitening)**:
+   Antes de aplicar el algoritmo ICA, las señales suelen ser **normalizadas** o **blanqueadas** (whitening). Esto significa que las señales mezcladas se transforman para tener una **varianza unitaria** y **covarianza cero**, lo que facilita el cálculo de la matriz de mezcla **W**. Este paso asegura que las componentes tengan independencia, eliminando cualquier correlación lineal.
+
+6. **Algoritmo iterativo**:
+   El ICA se resuelve a menudo a través de algoritmos iterativos que ajustan gradualmente la matriz **W** hasta que se maximiza la independencia de las señales separadas. Algunos de los algoritmos populares utilizados para ICA son **FastICA** y **InfoMax**. Estos métodos ajustan los pesos con base en la información estadística de las señales mezcladas.
+
 Con las potencias calculadas, se procede a calcular el SNR en decibelios usando la fórmula:
 
 ![Agregar](potencia.png)
