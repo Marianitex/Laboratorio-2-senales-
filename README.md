@@ -218,10 +218,12 @@ def mezclarVoces(audio1, audio2):
     mixed_signals = np.vstack(signals)
     return mixed_signals.T, sr  # Transpone la matriz para tener las señales en columnas
 ```
-
+- Graficas mezcla y espectro mezcla mama:
 ![Agregar](mezclamama.png)
 
 ![Agregar](espectromezclamama.png)
+
+- Grficas mezcla y espectro mezcla mari:
 
 ![Agregar](mezclamari.png)
 
