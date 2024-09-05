@@ -182,6 +182,10 @@ def analisisEspectral(data, sr, title="Espectro de frecuencias del audio"):
     plt.show()
 ```
 
+![Agregar](espectromama.png)
+
+![Agregar](espectromari.png)
+
 <a name="mezcla"></a> 
 ## Mezcla archivos de audio
 
@@ -214,6 +218,14 @@ def mezclarVoces(audio1, audio2):
     mixed_signals = np.vstack(signals)
     return mixed_signals.T, sr  # Transpone la matriz para tener las señales en columnas
 ```
+
+![Agregar](mezclamama.png)
+
+![Agregar](espectromezclamama.png)
+
+![Agregar](mezclamari.png)
+
+![Agregar](espectromezclamari.png)
 
 <a name="ica"></a> 
 ## Uso de ICA, separacion y SNR relacion señal-ruido
