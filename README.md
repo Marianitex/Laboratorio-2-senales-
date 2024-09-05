@@ -502,6 +502,7 @@ En la parte superior de la imagen, se visualizan tres señales de audio, represe
 
 La principal idea del ICA es que las señales independientes pueden separarse mediante la maximización de su independencia estadística, lo cual parece haberse logrado en la gráfica de la señal separada de Mari.
 
+
 #### Parte inferior (Espectros de frecuencia):
 En la parte inferior de la imagen, se presentan los **espectros de frecuencia** de las señales mostradas arriba. El espectro de frecuencia permite analizar cómo la energía de una señal está distribuida a través de diferentes frecuencias. Los primeros dos gráficos muestran los **espectros de las señales mezcladas** ("mezcla mama" y "mezcla mari"). Ambos espectros muestran picos en diferentes bandas de frecuencia, lo cual indica que las señales mezcladas contienen componentes tanto de las voces como del ruido. La mezcla de estas señales en el espectro de frecuencia puede complicar el proceso de separación, ya que no siempre es trivial distinguir entre los componentes de voz y los de ruido.
 
