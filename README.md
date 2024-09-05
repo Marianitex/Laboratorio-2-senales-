@@ -317,6 +317,20 @@ def opcion_calcular_snr():
         print(f"SNR para {audio_voces[i]}: {snr:.2f} dB")
 ```
 
+SNR para voz_mama.wav: 15.20 dB
+SNR para voz_mari.wav: 18.38 dB
+### **Análisis del SNR**
+1. SNR para voz_mama.wav: 15.20 dB
+
+Un SNR de 15.20 dB indica que la señal de voz en el archivo voz_mama.wav es más fuerte que el ruido, pero el nivel de ruido es todavía notable en comparación con la señal. Este valor se encuentra en el rango donde la señal es audiblemente clara pero el ruido es perceptible. En aplicaciones prácticas, esto podría significar que la calidad del audio es aceptable pero podría haber una cierta interferencia o distracción causada por el ruido.
+
+2. SNR para voz_mari.wav: 18.38 dB
+
+Un SNR de 18.38 dB es superior al valor anterior y sugiere que la señal de voz en el archivo voz_mari.wav es aún más clara en comparación con el ruido. Aunque el ruido sigue presente, su impacto es menor en comparación con voz_mama.wav. Este valor de SNR indica una mejor calidad de la señal, con la voz siendo más prominente y menos afectada por el ruido de fondo. La calidad es bastante buena, y la interferencia del ruido es menos significativa.
+
+
+Comparando ambos valores, voz_mari.wav tiene un SNR más alto (18.38 dB) que voz_mama.wav (15.20 dB), lo que implica que la señal de voz en voz_mari.wav es relativamente más clara y menos interferida por el ruido. Esto puede ser el resultado de una grabación de mejor calidad o una menor presencia de ruido en voz_mari.wav.
+
 <a name="menu"></a> 
 ## Menu
 
