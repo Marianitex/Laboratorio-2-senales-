@@ -283,14 +283,38 @@ Este nivel de SNR implica que la voz separada es clara y bien distinguible, con 
 
 ![Agregar](espectroseparadamari.png)
 
+-SNR para la voz separada: 45.37 dB, es aún mejor que el valor anterior de 44.62 dB, y sigue indicando una calidad de señal excepcionalmente alta. Este valor sugiere que la señal de voz es extremadamente clara en comparación con el nivel de ruido de fondo.
+
+Con un SNR de 45.37 dB, la voz separada es muy nítida, con el ruido presente en la señal siendo casi imperceptible. En términos prácticos, esto significa que la calidad de la señal de voz es excelente, y el ruido tiene un impacto insignificante, si es que se percibe en absoluto. Este alto SNR es indicativo de una separación de señales muy efectiva y de un procesamiento de audio de alta calidad.
 
 <a name="snr"></a> 
 ## Calculo SNR voces separadas
 
+La función `opcion_calcular_snr` tiene como objetivo calcular la relación señal-ruido (SNR) para cada par de archivos de audio de voz y ruido, y luego imprimir los resultados correspondientes. 
 
+Primero, la función comienza con un bucle `for` que itera tres veces, una para cada par de archivos de audio especificado. El índice `i` se utiliza para acceder a los archivos en las listas `audio_voces` y `audio_ruido`, permitiendo procesar cada par de archivos en la iteración actual.
+
+Dentro del bucle, la función carga los datos de audio para la voz y el ruido correspondientes al índice actual utilizando la función `loadAudio`. Esta función devuelve los datos de audio (`voz` y `ruido`) y la tasa de muestreo (`sr`). La tasa de muestreo se mantiene pero no se utiliza en cálculos posteriores dentro de esta función.
+
+Luego, se calcula la potencia de cada señal utilizando la función `potenciaDeSeñal`, que toma como entrada los datos de `voz` y `ruido`. Esta función devuelve dos valores: `potencia_voz` y `potencia_ruido`, que representan la potencia de las señales de voz y ruido, respectivamente. La potencia se determina como el promedio del cuadrado de los valores de la señal.
+
+Con las potencias calculadas, se procede a calcular el SNR en decibelios usando la fórmula:
+
+\[ \text{SNR (dB)} = 10 \times \log_{10}\left(\frac{\text{potencia\_voz}}{\text{potencia\_ruido}}\right) \]
+
+La función `np.log10` calcula el logaritmo en base 10, y el resultado se multiplica por 10 para expresar el SNR en decibelios.
+
+Finalmente, el valor calculado del SNR se imprime en la consola. La impresión se realiza utilizando una cadena de formato que muestra el nombre del archivo de voz y el valor del SNR con dos decimales. Esto proporciona una manera clara y directa de visualizar la calidad de la señal de voz en relación con el ruido para cada par de archivos analizados.
 
 ```c
-
+# Función para calcular la relación señal-ruido (SNR) para cada archivo
+def opcion_calcular_snr():
+    for i in range(3):
+        voz, sr = loadAudio(audio_voces[i])
+        ruido, sr = loadAudio(audio_ruido[i])
+        potencia_voz, potencia_ruido = potenciaDeSeñal(voz, ruido)
+        snr = 10.0 * np.log10(potencia_voz / potencia_ruido)  # Calcula el SNR en decibelios
+        print(f"SNR para {audio_voces[i]}: {snr:.2f} dB")
 ```
 
 
