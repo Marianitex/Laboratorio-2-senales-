@@ -267,13 +267,17 @@ def identificar_voz(components, sr):
     return components[:, seleccion]  # Devuelve la componente seleccionada
 ```
 
--Graficas voz separada y espectro voz separada mama:
+- Graficas voz separada y espectro voz separada mama:
 
 ![Agregar](vozseparadamama.png)
 
 ![Agregar](espectroseparadamama.png)
 
--Graficas voz separada y espectro voz separada mari:
+-SNR para la voz separada: 44.62 dB, es un valor bastante alto que indica una excelente calidad de la señal de audio. En términos simples, el SNR mide la relación entre la intensidad de la señal deseada (en este caso, la voz) y el nivel de ruido de fondo. Un SNR alto, sugiere que la señal de voz es mucho más fuerte que el ruido, lo que significa que el ruido tiene una presencia mínima en la señal final.
+
+Este nivel de SNR implica que la voz separada es clara y bien distinguible, con poco impacto del ruido. Esto es crucial en aplicaciones de procesamiento de audio y comunicación, donde es importante mantener la claridad de la voz. En general, los valores de SNR más altos corresponden a una mejor calidad de la señal, con menos interferencia del ruido.
+
+- Graficas voz separada y espectro voz separada mari:
 
 ![Agregar](vozseparadamari.png)
 
