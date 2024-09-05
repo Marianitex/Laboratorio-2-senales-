@@ -67,7 +67,7 @@ La grabacion se realizo en este caso por medio una aplicacion llamada "Grabadora
 
 ![Agregar](grabadora.jpg)
 
-Para la grabacion la frecuencia de muestreo fue de 16 kHz en cada celular, se grabaron 4 segundos del ruido del ambiente y 4 segundos a las personas hablando.
+Para la grabacion la frecuencia de muestreo fue de 16 kHz en cada celular, se grabaron 5 segundos del ruido del ambiente y 4 segundos a las personas hablando.
 
 ![Agregar](frecuencia.jpg)
 
