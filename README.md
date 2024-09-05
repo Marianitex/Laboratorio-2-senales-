@@ -13,8 +13,8 @@ Septiembre 2024
 * [Graficas de onda del audio](#onda)
 * [Espectro de frecuencia](#espectro)
 * [Mezcla archivos de audio](#mezcla)
-* [Uso de ICA y separacion](#ica)
-* [Calculo SNR](#snr)
+* [Uso de ICA, separacion y SNR relacion señal-ruido](#ica)
+* [Calculo SNR voces separadas](#snr)
 * [Menu](#menu)
 * [Analisis](#analisis)
 * [Contacto](#contacto)
@@ -181,21 +181,75 @@ def analisisEspectral(data, sr, title="Espectro de frecuencias del audio"):
 <a name="mezcla"></a> 
 ## Mezcla archivos de audio
 
+La función `mezclarVoces` está diseñada para combinar dos archivos de audio en una sola señal, permitiendo mezclarlos para obtener una mezcla de las dos grabaciones. 
 
+Primero, la función carga los datos de ambos archivos de audio utilizando la función `loadAudio`. Esto se realiza llamando a `loadAudio(audio1)` y `loadAudio(audio2)`, lo que devuelve dos conjuntos de datos de audio y la tasa de muestreo (`sr`). La tasa de muestreo es la misma para ambos archivos, ya que `loadAudio` se encargará de mantener la tasa original.
+
+Luego, la función asegura que ambas señales de audio tengan la misma longitud para evitar problemas en el procesamiento posterior. Calcula la longitud mínima entre las dos señales usando `min(len(data1), len(data2))` y ajusta ambas señales a esta longitud. Esto garantiza que tanto `data1` como `data2` tengan el mismo número de muestras al recortar el exceso de datos en la señal más larga.
+
+Las señales ajustadas se almacenan en una lista llamada `signals`. Luego, se utiliza `np.vstack(signals)` para apilar las dos señales en una matriz, donde cada fila representa una de las señales. Finalmente, la matriz se transpone con `mixed_signals.T` para que cada señal ocupe una columna en lugar de una fila.
+
+El resultado de la función es una matriz en la que cada columna corresponde a una de las señales originales mezcladas, y se devuelve junto con la tasa de muestreo `sr`. Esta estructura facilita la manipulación y análisis de las señales mezcladas, permitiendo trabajar con ambas señales simultáneamente en el mismo formato.
 
 ```c
-
+# Función para mezclar dos archivos de audio
+def mezclarVoces(audio1, audio2):
+    signals = []
+    data1, sr = loadAudio(audio1)  # Carga el primer archivo
+    data2, sr = loadAudio(audio2)  # Carga el segundo archivo
+    
+    # Ajusta la longitud para que ambas señales tengan el mismo tamaño
+    min_len = min(len(data1), len(data2))
+    data1 = data1[:min_len]
+    data2 = data2[:min_len]
+    
+    signals.append(data1)
+    signals.append(data2)
+    
+    # Apila las señales para mezclarlas
+    mixed_signals = np.vstack(signals)
+    return mixed_signals.T, sr  # Transpone la matriz para tener las señales en columnas
 ```
 
 <a name="ica"></a> 
-## Uso de ICA y separacion
+## Uso de ICA, separacion y SNR relacion señal-ruido
+
+La función `aplicar_ica` está diseñada para aplicar el Análisis de Componentes Independientes (ICA) a una señal de audio con el objetivo de separar las señales mezcladas en componentes individuales. Primero, se configura el ICA mediante la creación de una instancia de `FastICA` con dos componentes (`n_components=2`), que indica que el algoritmo intentará separar la señal en dos componentes independientes. Además, se establecen parámetros como `max_iter=1000` para el número máximo de iteraciones y `tol=0.001` para la tolerancia de convergencia del algoritmo. Luego, se aplica ICA a la señal usando `ica.fit_transform(signal)`, que devuelve una matriz con las señales separadas. La función finalmente retorna esta matriz, donde cada columna representa una de las señales independientes obtenidas.
+
+La función `potenciaDeSeñal` calcula la potencia de dos señales, una de voz y una de ruido. La potencia de una señal se define como el promedio de los cuadrados de sus valores. Para calcular la potencia de la voz, se utiliza `np.mean(voz**2)`, y para la potencia del ruido, se usa `np.mean(ruido**2)`. Estos cálculos permiten medir la intensidad de cada señal en términos de su energía promedio. La función retorna dos valores: la potencia de la voz y la potencia del ruido, facilitando la comparación entre ambos.
+
+La función `identificar_voz` ayuda a determinar cuál de las componentes separadas por ICA corresponde a la señal de voz original. Primero, la función itera sobre las componentes obtenidas de ICA, graficando cada componente usando las funciones `graficarSonido` y `analisisEspectral` para mostrar la forma de onda y el espectro de frecuencias. Esto proporciona una visualización que ayuda al usuario a identificar cuál componente parece ser la voz. Después de mostrar las gráficas, el usuario debe seleccionar la componente que parece ser la voz a través de una entrada de texto. La función verifica si la selección es válida y devuelve la componente seleccionada. Si la selección no es válida, muestra un mensaje de error y retorna `None`. Este proceso permite identificar y extraer la señal de voz de las componentes separadas.
 
 ```c
+# Función para aplicar ICA y separar las señales
+def aplicar_ica(signal):
+    ica = FastICA(n_components=2, max_iter=1000, tol=0.001)  # Configuración del ICA
+    señales_separadas = ica.fit_transform(signal)  # Aplica ICA para separar las señales
+    
+    return señales_separadas
 
+# Función para calcular la potencia de la señal
+def potenciaDeSeñal(voz, ruido):
+    potencia_voz = np.mean(voz**2)  # Calcula la potencia de la voz
+    potencia_ruido = np.mean(ruido**2)  # Calcula la potencia del ruido
+    return potencia_voz, potencia_ruido
+
+# Función para identificar la componente de voz tras aplicar ICA
+def identificar_voz(components, sr):
+    # Asumimos que la componente más cercana a la forma de onda de la voz original es la voz
+    for i, component in enumerate(components.T):
+        graficarSonido(component, sr, f"Componente {i+1} para identificación de voz")
+        analisisEspectral(component, sr, f"Espectro de la componente {i+1}")
+    
+    seleccion = int(input("\nSeleccione el número de la componente que parece ser la voz (1 o 2): ")) - 1
+    if seleccion < 0 or seleccion >= len(components.T):
+        print("Opción no válida.")
+        return None
+    return components[:, seleccion]  # Devuelve la componente seleccionada
 ```
 
 <a name="snr"></a> 
-## Calculo SNR
+## Calculo SNR voces separadas
 
 ```c
 
